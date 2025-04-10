@@ -1,3 +1,4 @@
+
 import React from 'react';
 import MainLayout from '@/components/layout/MainLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -27,7 +28,7 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import StatusBadge from '@/components/common/StatusBadge';
 import AlertCard from '@/components/common/AlertCard';
-import { BarChart } from '@/components/ui/chart';
+import { BarChart } from '@/components/ui/charts';
 import AppCloneCard from '@/components/common/AppCloneCard';
 
 const Dashboard = () => {

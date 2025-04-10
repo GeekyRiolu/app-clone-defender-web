@@ -4,12 +4,12 @@ import MainLayout from '@/components/layout/MainLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { scanStatus } from '@/data/mockData';
-import { ScanResult, scanApkFile } from '@/services/scanService';
+import { ScanResult as ScanResultType, scanApkFile } from '@/services/scanService';
 import { toast } from '@/hooks/use-toast';
 
 // Import refactored components
 import ScannerHeader from '@/components/scanner/ScannerHeader';
-import ScanResult from '@/components/scanner/ScanResult';
+import ScanResultComponent from '@/components/scanner/ScanResult';
 import ApkUploader from '@/components/scanner/ApkUploader';
 import IconUploader from '@/components/scanner/IconUploader';
 import PackageSearch from '@/components/scanner/PackageSearch';
@@ -22,7 +22,7 @@ const Scanner = () => {
   const [progress, setProgress] = useState(0);
   const [scanTab, setScanTab] = useState('package');
   const [file, setFile] = useState<File | null>(null);
-  const [scanResult, setScanResult] = useState<ScanResult | null>(null);
+  const [scanResult, setScanResult] = useState<ScanResultType | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
 
@@ -113,7 +113,7 @@ const Scanner = () => {
             </CardHeader>
             <CardContent>
               {scanResult ? (
-                <ScanResult scanResult={scanResult} onResetScan={handleResetScan} />
+                <ScanResultComponent scanResult={scanResult} onResetScan={handleResetScan} />
               ) : (
                 <Tabs defaultValue={scanTab} onValueChange={setScanTab}>
                   <TabsList className="mb-4 grid w-full grid-cols-3">
