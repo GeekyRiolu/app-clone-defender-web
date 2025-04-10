@@ -170,7 +170,7 @@ const Scanner = () => {
                         <Checkbox id="similarityThreshold" defaultChecked />
                         <div className="grid gap-1.5 leading-none">
                           <Label htmlFor="similarityThreshold" className="text-sm font-normal">
-                            High Similarity Only (>75%)
+                            High Similarity Only ({">"} 75%)
                           </Label>
                           <p className="text-xs text-muted-foreground">
                             Filter results by similarity score
