@@ -1,4 +1,3 @@
-
 import React from 'react';
 import MainLayout from '@/components/layout/MainLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -104,7 +103,7 @@ const Dashboard = () => {
                   </div>
                   <span className="text-sm font-medium">{riskDistribution.critical}</span>
                 </div>
-                <Progress value={(riskDistribution.critical / 5) * 100} className="h-2 bg-gray-100" indicatorClassName="bg-red-500" />
+                <Progress value={(riskDistribution.critical / 5) * 100} className="h-2 bg-gray-100" />
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1">
@@ -114,7 +113,7 @@ const Dashboard = () => {
                   </div>
                   <span className="text-sm font-medium">{riskDistribution.high}</span>
                 </div>
-                <Progress value={(riskDistribution.high / 5) * 100} className="h-2 bg-gray-100" indicatorClassName="bg-orange-500" />
+                <Progress value={(riskDistribution.high / 5) * 100} className="h-2 bg-gray-100" />
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1">
@@ -124,7 +123,7 @@ const Dashboard = () => {
                   </div>
                   <span className="text-sm font-medium">{riskDistribution.medium}</span>
                 </div>
-                <Progress value={(riskDistribution.medium / 5) * 100} className="h-2 bg-gray-100" indicatorClassName="bg-amber-500" />
+                <Progress value={(riskDistribution.medium / 5) * 100} className="h-2 bg-gray-100" />
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1">
@@ -134,7 +133,7 @@ const Dashboard = () => {
                   </div>
                   <span className="text-sm font-medium">{riskDistribution.low}</span>
                 </div>
-                <Progress value={(riskDistribution.low / 5) * 100} className="h-2 bg-gray-100" indicatorClassName="bg-green-500" />
+                <Progress value={(riskDistribution.low / 5) * 100} className="h-2 bg-gray-100" />
               </div>
             </div>
           </CardContent>

@@ -12,7 +12,7 @@ import {
   TableHeader, 
   TableRow 
 } from '@/components/ui/table';
-import { BarChart, LineChart } from '@/components/ui/chart';
+import { BarChart, LineChart } from '@/components/ui/charts';
 import { Download, FileDown, FileSpreadsheet, Filter, FilePieChart, FileText } from 'lucide-react';
 import { cloneDetectionTrend, clonedApps, monitoredApps } from '@/data/mockData';
 
