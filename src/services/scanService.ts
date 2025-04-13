@@ -1,10 +1,10 @@
-
 import { toast } from "@/hooks/use-toast";
 
 export type ScanResult = {
-  id: string;
+  id?: string;
   fileName: string;
   fileSize: string;
+  packageName: string; // Added packageName property
   scanDate: string;
   overallScore: number;
   results: {
@@ -49,6 +49,7 @@ export const scanApkFile = async (file: File): Promise<ScanResult> => {
         id: crypto.randomUUID(),
         fileName: file.name,
         fileSize: formatFileSize(file.size),
+        packageName: file.name,
         scanDate: new Date().toISOString(),
         overallScore: isSuspicious ? Math.floor(Math.random() * 40) + 30 : Math.floor(Math.random() * 30) + 70,
         results: {
