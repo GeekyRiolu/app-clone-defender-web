@@ -15,8 +15,11 @@ import {
 import { BarChart, LineChart } from '@/components/ui/charts';
 import { Download, FileDown, FileSpreadsheet, Filter, FilePieChart, FileText } from 'lucide-react';
 import { cloneDetectionTrend, clonedApps, monitoredApps } from '@/data/mockData';
+import { useToast } from '@/hooks/use-toast';
 
 const Reports = () => {
+  const { toast } = useToast();
+
   // Mock chart data
   const chartData = [
     {
@@ -64,6 +67,119 @@ const Reports = () => {
     },
   ];
 
+  // Handle main export button click
+  const handleExport = () => {
+    toast({
+      title: "Export Started",
+      description: "Your report is being generated and will download shortly.",
+    });
+    
+    // Simulate download delay
+    setTimeout(() => {
+      // Create a mock CSV content
+      const csvContent = "Date,Clone Count\nMar 10,2\nMar 17,3\nMar 24,1\nMar 31,4\nApr 7,5";
+      
+      // Create a blob and trigger download
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'clone_detection_report.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      toast({
+        title: "Download Complete",
+        description: "Your report has been downloaded successfully.",
+      });
+    }, 1500);
+  };
+
+  // Handle download for pre-generated reports
+  const handleReportDownload = (reportType) => {
+    toast({
+      title: "Preparing Download",
+      description: `Your ${reportType} report is being prepared...`,
+    });
+    
+    // Simulate download delay
+    setTimeout(() => {
+      let filename = '';
+      let fileContent = '';
+      
+      // Generate appropriate mock content based on report type
+      switch (reportType) {
+        case 'Monthly Summary':
+          filename = 'monthly_summary_report.pdf';
+          fileContent = 'Monthly Summary Report Content';
+          break;
+        case 'Clone Details':
+          filename = 'clone_details_report.xlsx';
+          fileContent = 'Clone Details Report Content';
+          break;
+        case 'Risk Analysis':
+          filename = 'risk_analysis_report.pdf';
+          fileContent = 'Risk Analysis Report Content';
+          break;
+        default:
+          filename = 'report.txt';
+          fileContent = 'Report Content';
+      }
+      
+      // Create a blob and trigger download
+      const blob = new Blob([fileContent], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      toast({
+        title: "Download Complete",
+        description: `Your ${reportType} report has been downloaded.`,
+      });
+    }, 1000);
+  };
+
+  // Handle CSV export for takedown history
+  const handleExportCSV = () => {
+    toast({
+      title: "Exporting CSV",
+      description: "Takedown history data is being exported to CSV...",
+    });
+    
+    // Simulate download delay
+    setTimeout(() => {
+      // Create a mock CSV content
+      const csvContent = "App Name,Clone Name,Store,Request Date,Resolved Date,Status\n" +
+        "Super VPN,SuperFast VPN,Alternative App Store,Apr 5 2025,Pending,In Progress\n" +
+        "Cloud Bank,Cloud Bank Mobile,Third-Party Store C,Apr 2 2025,Apr 7 2025,Successful\n" +
+        "Secure Messaging Pro,Secure Message,Alternative App Store,Mar 30 2025,Apr 8 2025,Successful\n" +
+        "Photo Editor Pro,Photo Editor Plus,Third-Party Store B,Mar 25 2025,Mar 30 2025,Successful";
+      
+      // Create a blob and trigger download
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'takedown_history.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      toast({
+        title: "CSV Export Complete",
+        description: "Takedown history has been exported to CSV successfully.",
+      });
+    }, 1200);
+  };
+
   return (
     <MainLayout>
       <div className="flex items-center justify-between mb-6">
@@ -83,7 +199,7 @@ const Reports = () => {
               <SelectItem value="lastyear">Last Year</SelectItem>
             </SelectContent>
           </Select>
-          <Button>
+          <Button onClick={handleExport}>
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
@@ -146,7 +262,7 @@ const Reports = () => {
                   <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
                     <FileText className="h-5 w-5 text-blue-600" />
                   </div>
-                  <Button variant="ghost" size="icon">
+                  <Button variant="ghost" size="icon" onClick={() => handleReportDownload('Monthly Summary')}>
                     <Download className="h-4 w-4" />
                   </Button>
                 </div>
@@ -166,7 +282,7 @@ const Reports = () => {
                   <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
                     <FileSpreadsheet className="h-5 w-5 text-green-600" />
                   </div>
-                  <Button variant="ghost" size="icon">
+                  <Button variant="ghost" size="icon" onClick={() => handleReportDownload('Clone Details')}>
                     <Download className="h-4 w-4" />
                   </Button>
                 </div>
@@ -186,7 +302,7 @@ const Reports = () => {
                   <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
                     <FilePieChart className="h-5 w-5 text-purple-600" />
                   </div>
-                  <Button variant="ghost" size="icon">
+                  <Button variant="ghost" size="icon" onClick={() => handleReportDownload('Risk Analysis')}>
                     <Download className="h-4 w-4" />
                   </Button>
                 </div>
@@ -207,7 +323,7 @@ const Reports = () => {
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle>Takedown History</CardTitle>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={handleExportCSV}>
               <FileDown className="h-4 w-4 mr-2" />
               Export CSV
             </Button>
