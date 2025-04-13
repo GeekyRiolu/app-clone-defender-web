@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import MainLayout from '@/components/layout/MainLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -30,18 +31,52 @@ import StatusBadge from '@/components/common/StatusBadge';
 import AlertCard from '@/components/common/AlertCard';
 import { BarChart } from '@/components/ui/charts';
 import AppCloneCard from '@/components/common/AppCloneCard';
+import { toast } from '@/hooks/use-toast';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  
   const getOriginalApp = (clonedApp: ClonedApp): MonitoredApp => {
     return monitoredApps.find(app => app.id === clonedApp.originalAppId) || monitoredApps[0];
   };
 
-  const handleTakedownClick = () => {
-    console.log('Initiating takedown');
+  const handleTakedownClick = (alertId?: string) => {
+    console.log('Initiating takedown', alertId);
+    toast({
+      title: "Takedown Initiated",
+      description: `Takedown request has been submitted`,
+      variant: "default",
+    });
   };
 
-  const handleDetailsClick = () => {
-    console.log('Viewing details');
+  const handleDetailsClick = (alertId?: string) => {
+    console.log('Viewing details', alertId);
+    // Navigate to alerts details page or show a dialog
+    if (alertId) {
+      // In a real app, we would navigate to a specific alert detail page
+      // For now, we'll just navigate to the alerts page
+      navigate('/alerts');
+    }
+  };
+  
+  const handleViewAllAlerts = () => {
+    console.log('Viewing all alerts');
+    navigate('/alerts');
+  };
+
+  const handleViewAllMonitoredApps = () => {
+    console.log('Viewing all monitored apps');
+    navigate('/monitoring');
+  };
+
+  const handleViewAllClones = () => {
+    console.log('Viewing all clones');
+    navigate('/monitoring');
+  };
+
+  const handleScanNow = () => {
+    console.log('Scanning now');
+    navigate('/scanner');
   };
 
   return (
@@ -51,7 +86,7 @@ const Dashboard = () => {
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground">Monitor and manage app clone threats</p>
         </div>
-        <Button>
+        <Button onClick={handleScanNow}>
           <Search className="h-4 w-4 mr-2" />
           Scan Now
         </Button>
@@ -145,7 +180,7 @@ const Dashboard = () => {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base font-medium">Recent Alerts</CardTitle>
-              <Button variant="ghost" size="sm" className="gap-1 text-xs">
+              <Button variant="ghost" size="sm" className="gap-1 text-xs" onClick={handleViewAllAlerts}>
                 View All <ArrowRight className="h-3 w-3" />
               </Button>
             </div>
@@ -158,7 +193,13 @@ const Dashboard = () => {
               <AlertCard 
                 key={alert.id} 
                 alert={alert} 
-                onActionClick={handleTakedownClick}
+                onActionClick={() => {
+                  if (alert.type === 'clone_detected' || alert.type === 'risk_increased') {
+                    handleTakedownClick(alert.id);
+                  } else if (alert.type === 'takedown_status') {
+                    handleDetailsClick(alert.id);
+                  }
+                }}
               />
             ))}
           </CardContent>
@@ -169,7 +210,7 @@ const Dashboard = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold">High Risk Clones</h2>
-          <Button variant="outline" size="sm" className="gap-1">
+          <Button variant="outline" size="sm" className="gap-1" onClick={handleViewAllClones}>
             View All <ArrowRight className="h-4 w-4" />
           </Button>
         </div>
@@ -182,8 +223,8 @@ const Dashboard = () => {
                 key={clonedApp.id}
                 clonedApp={clonedApp}
                 originalApp={getOriginalApp(clonedApp)}
-                onTakedownClick={handleTakedownClick}
-                onDetailsClick={handleDetailsClick}
+                onTakedownClick={() => handleTakedownClick(clonedApp.id)}
+                onDetailsClick={() => handleDetailsClick(clonedApp.id)}
               />
             ))}
         </div>
@@ -193,7 +234,7 @@ const Dashboard = () => {
       <div>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold">Monitored Apps</h2>
-          <Button variant="outline" size="sm" className="gap-1">
+          <Button variant="outline" size="sm" className="gap-1" onClick={handleViewAllMonitoredApps}>
             View All <ArrowRight className="h-4 w-4" />
           </Button>
         </div>
@@ -219,7 +260,12 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="border-t p-2 bg-gray-50 flex justify-end">
-                  <Button variant="ghost" size="sm" className="text-xs px-2 h-7">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-xs px-2 h-7"
+                    onClick={() => handleDetailsClick(app.id)}
+                  >
                     Details <ArrowRightCircle className="ml-1 h-3 w-3" />
                   </Button>
                 </div>
