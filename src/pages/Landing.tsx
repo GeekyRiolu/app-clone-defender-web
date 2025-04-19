@@ -1,9 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Shield, Search, AlertTriangle, FileText, Lock, Scan, Bug, Laptop } from 'lucide-react';
+import LoadingScreen from '../components/LoadingScreen';
 
 const Landing = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate(path);
+    }, 6000);
+  };
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
       {/* Floating Background Elements */}
@@ -37,11 +53,13 @@ const Landing = () => {
                 AppClone Buster
               </span>
             </div>
-            <Link to="/dashboard">
-              <Button variant="outline" className="bg-white/80 backdrop-blur-sm hover:bg-gray-100 text-gray-800">
-                Login to Dashboard
-              </Button>
-            </Link>
+            <Button 
+              variant="outline" 
+              className="bg-white/80 backdrop-blur-sm hover:bg-gray-100 text-gray-800"
+              onClick={() => handleNavigation('/dashboard')}
+            >
+              Login to Dashboard
+            </Button>
           </div>
         </nav>
         
@@ -54,23 +72,21 @@ const Landing = () => {
               Detect, monitor, and mitigate unauthorized app clones to protect your brand integrity and user trust.
             </p>
             <div className="flex justify-center gap-4 animate-fade-in delay-400">
-              <Link to="/dashboard">
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
-                >
-                  Get Started
-                </Button>
-              </Link>
-              <Link to="/scanner">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-blue-500 text-blue-600 hover:bg-blue-50 transition-colors"
-                >
-                  Try Scanner
-                </Button>
-              </Link>
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
+                onClick={() => handleNavigation('/dashboard')}
+              >
+                Get Started
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-blue-500 text-blue-600 hover:bg-blue-50 transition-colors"
+                onClick={() => handleNavigation('/scanner')}
+              >
+                Try Scanner
+              </Button>
             </div>
           </div>
         </div>
@@ -123,14 +139,13 @@ const Landing = () => {
           <p className="text-lg text-gray-600 mb-8">
             Join hundreds of app developers who trust AppClone Buster to protect their applications from unauthorized clones.
           </p>
-          <Link to="/dashboard">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-blue-600 to-purple-700 text-white hover:from-blue-700 hover:to-purple-800 transition-all duration-300"
-            >
-              Start Protection Now
-            </Button>
-          </Link>
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-blue-600 to-purple-700 text-white hover:from-blue-700 hover:to-purple-800 transition-all duration-300"
+            onClick={() => handleNavigation('/dashboard')}
+          >
+            Start Protection Now
+          </Button>
         </div>
       </section>
     </div>
