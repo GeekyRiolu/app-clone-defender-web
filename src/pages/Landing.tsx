@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Shield, Search, AlertTriangle, FileText } from 'lucide-react';
+import { Shield, Search, AlertTriangle, FileText, Lock, Scan, Bug, Laptop } from 'lucide-react';
 
 const Landing = () => {
   return (
@@ -10,17 +9,36 @@ const Landing = () => {
       {/* Floating Background Elements */}
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl animate-pulse-slow"></div>
       <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-purple-100/50 rounded-full blur-3xl animate-pulse-slow"></div>
+      
+      {/* Animated Floating Icons */}
+      <div className="absolute top-1/4 left-1/4 animate-bounce delay-100">
+        <Shield className="w-8 h-8 text-blue-400 opacity-30" />
+      </div>
+      <div className="absolute top-1/3 right-1/4 animate-bounce delay-300">
+        <Lock className="w-6 h-6 text-purple-400 opacity-30" />
+      </div>
+      <div className="absolute bottom-1/4 left-1/3 animate-bounce delay-500">
+        <Scan className="w-10 h-10 text-green-400 opacity-30" />
+      </div>
+      <div className="absolute top-2/3 right-1/3 animate-bounce delay-700">
+        <Bug className="w-7 h-7 text-red-400 opacity-30" />
+      </div>
+      <div className="absolute bottom-1/3 right-1/4 animate-bounce delay-200">
+        <Laptop className="w-9 h-9 text-indigo-400 opacity-30" />
+      </div>
 
       {/* Hero Section */}
       <header className="relative z-10 overflow-hidden">
         <nav className="absolute top-0 w-full z-10 px-6 py-4">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <Shield className="h-8 w-8 text-white" />
-              <span className="text-xl font-bold text-white">AppClone Buster</span>
+              <Shield className="h-8 w-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg p-1 text-white" />
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
+                AppClone Buster
+              </span>
             </div>
             <Link to="/dashboard">
-              <Button variant="outline" className="bg-white hover:bg-gray-100 text-sidebar-background">
+              <Button variant="outline" className="bg-white/80 backdrop-blur-sm hover:bg-gray-100 text-gray-800">
                 Login to Dashboard
               </Button>
             </Link>
