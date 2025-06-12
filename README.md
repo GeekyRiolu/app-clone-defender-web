@@ -1,73 +1,75 @@
-# Welcome to your Lovable project
+# App Clone Defender Web
 
-## Project info
+App Clone Defender Web is a web application designed to help developers and businesses detect and defend against unauthorized clones of their applications. Built using modern web technologies, it provides an intuitive interface and robust tooling for clone detection, monitoring, and management.
 
-**URL**: https://lovable.dev/projects/8e76b610-563b-4879-9acd-d78dfebd2b35
+## Table of Contents
 
-## How can I edit this code?
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Contributing](#contributing)
+- [Contact](#contact)
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+- Clone detection and reporting dashboard
+- Real-time monitoring of app clones
+- Integration with Lovable platform for easy project management
+- Modern responsive UI with Tailwind CSS and shadcn-ui
+- Easy deployment and custom domain support
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/8e76b610-563b-4879-9acd-d78dfebd2b35) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Technologies Used
 
-**Use your preferred IDE**
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://react.dev/)
+- [shadcn-ui](https://ui.shadcn.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Prerequisites
 
-Follow these steps:
+- [Node.js](https://nodejs.org/) (Recommended: use [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) for managing Node versions)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+
+### Installation
+
+Clone the repository and install the dependencies:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone https://github.com/GeekyRiolu/app-clone-defender-web.git
+cd app-clone-defender-web
+npm install
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Running the Development Server
 
-# Step 3: Install the necessary dependencies.
-npm i
+To start the development server with auto-reloading and instant preview:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will typically be available at `http://localhost:5173` or as specified in your terminal output.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
 
-**Use GitHub Codespaces**
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Contributing
 
-## What technologies are used for this project?
+Contributions are welcome! Please open an issue or submit a pull request for bug fixes, improvements, or new features.
 
-This project is built with:
+1. Fork the repository
+2. Create your feature branch: `git checkout -b my-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-feature`
+5. Open a pull request
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Contact
 
-## How can I deploy this project?
+For questions, feedback, or support, please open an issue on GitHub or contact the maintainer:
 
-Simply open [Lovable](https://lovable.dev/projects/8e76b610-563b-4879-9acd-d78dfebd2b35) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- GitHub: [GeekyRiolu](https://github.com/GeekyRiolu)
